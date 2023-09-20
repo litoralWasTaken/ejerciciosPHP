@@ -1,3 +1,9 @@
+<?php
+
+$titulo = "Lenovo IdeaPad 3";
+$descripcion = "Lenovo IdeaPad 3 15IAU7 Intel Core i5-1235U/16GB/512GB SSD/15.6\"";
+$precio = "1233,99€";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -28,9 +34,9 @@
                 <div class="card" style="width: 18rem;">
                     <img src="https://thumb.pccomponentes.com/w-300-300/articles/1063/10639213/1359-lenovo-ideapad-3-15iau7-intel-core-i5-1235u-16gb-512gb-ssd-156.jpg" alt="">
                     <div class="card-body">
-                        <h5 class="card-title">Lenovo IdeaPad 3</h5>
-                        <p class="card-text">Lenovo IdeaPad 3 15IAU7 Intel Core i5-1235U/16GB/512GB SSD/15.6''<br>
-                            <b> 1233,99€ </b>
+                        <h5 class="card-title"><?= $titulo ?></h5>
+                        <p class="card-text"><?= $descripcion ?><br>
+                            <b> <?= $precio ?> </b>
                         </p>
                         <a href="#" class="btn btn-primary"> Ver </a>
                         <a href="#" class="btn btn-primary"> Añadir </a>

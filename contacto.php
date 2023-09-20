@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tienda online PHP</title>
+    <title>Contacto de la tienda PHP</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link href="assets/css/style.css" rel="stylesheet">
 
@@ -22,22 +22,9 @@
             </li>
         </ul>
     </nav>
+
     <main>
-        <div class="container">
-            <div class="row">
-                <div class="card" style="width: 18rem;">
-                    <img src="https://thumb.pccomponentes.com/w-300-300/articles/1063/10639213/1359-lenovo-ideapad-3-15iau7-intel-core-i5-1235u-16gb-512gb-ssd-156.jpg" alt="">
-                    <div class="card-body">
-                        <h5 class="card-title">Lenovo IdeaPad 3</h5>
-                        <p class="card-text">Lenovo IdeaPad 3 15IAU7 Intel Core i5-1235U/16GB/512GB SSD/15.6''<br>
-                            <b> 1233,99€ </b>
-                        </p>
-                        <a href="#" class="btn btn-primary"> Ver </a>
-                        <a href="#" class="btn btn-primary"> Añadir </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <h1> Página de contacto...</h1>
     </main>
 
     <footer>

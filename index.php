@@ -1,5 +1,7 @@
 <?php
 // Recogida de datos
+$email = $_POST['email'];
+$password = $_POST['password'];
 // validaciones de Login
 ?>
 <!DOCTYPE html>

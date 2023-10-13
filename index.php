@@ -3,6 +3,56 @@
 $email = $_POST['email'];
 $password = $_POST['password'];
 // validaciones de Login
+function didValidateEmail($email)
+{
+    global $error_code;
+    $returnEmail = false;
+    if (isset($email) && filter_var($email, FILTER_SANITIZE_EMAIL)) {
+        $returnEmail = true;
+    } else {
+        $error_code = 'Email no valido o no presente';
+    }
+
+    return $returnEmail;
+}
+function didValidatePassword($password)
+{
+    global $error_code;
+    $returnPass = false;
+    if (isset($password) && filter_var($password, FILTER_SANITIZE_STRING) && strlen($password) >= 6 && $password !== '123456' && $password !== 'password') {
+        $returnPass = true;
+    } else {
+        $error_code = 'Contraseña no válida o no presente';
+    }
+
+    return $returnPass;
+}
+
+function requiredFields($email, $password)
+{
+    $returnFields = false;
+    if (isset($email) && isset($password)) {
+        $returnFields = true;
+    }
+    return $returnFields;
+}
+
+function validateLogin($email, $password)
+{
+    $did_login = false;
+    if (requiredFields($email, $password)) {
+
+        if (didValidateEmail($email) && didValidatePassword($password)) {
+            $did_login = true;
+        }
+    }
+
+    return $did_login;
+}
+
+global $error_code;
+
+$did_login = validateLogin($email, $password);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,8 +75,11 @@ $password = $_POST['password'];
             <a class="link" href="#">Sobre nosotros</a>
             <a class="link" href="#">Contacto</a>
             <li class="nav-item">
-                <!-- <a class="btn btn-outline-light" href="#" >Login</a> -->
-                <a class="btn btn-outline-danger" href="#">Logout</a>
+                <?php if (!$did_login) {
+                    echo '<a class="btn btn-outline-light" href="#">Login</a>';
+                } else if ($did_login) {
+                    echo '<a class="btn btn-outline-danger" href="#">Logout</a>';
+                } ?>
             </li>
         </ul>
     </nav>
@@ -34,21 +87,18 @@ $password = $_POST['password'];
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-6">
-                    <form action="" method="POST">
-                        <div class="row mb-3">
-                            <label for="email" class="col-sm-2 col-form-label">Email</label>
-                            <div class="col-sm-10">
-                                <input type="email" class="form-control" id="email" name="email">
-                            </div>
-                        </div>
-                        <div class="row mb-3">
-                            <label for="password" class="col-sm-2 col-form-label">Password</label>
-                            <div class="col-sm-10">
-                                <input type="password" class="form-control" id="password" name="password">
-                            </div>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
+                    <?php
+                    var_dump($error_code);
+                    if (!$did_login) {
+                        require_once('./modules/formlogin.php');
+                        if (isset($error_code)) {
+                            require './modules/error.php';
+                        }
+                    } else {
+                        echo "<h1> Bienvenido: $email </h1>";
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>

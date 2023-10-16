@@ -1,16 +1,22 @@
-.navbar a.link{
-    color: white;
-    text-decoration: none;
-    padding: 10px;
-    color: white;
-    padding: 7px 20px;
+.navbar a.link {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  color: white;
+  padding: 7px 20px;
 }
-.navbar a.link:hover{
-    text-decoration: underline;
-
+.navbar a.link:hover {
+  text-decoration: underline;
 }
 
-main{
-    min-height: 80vh;
-    padding: 30px;
+main {
+  min-height: 80vh;
+  padding: 30px;
+}
+
+.login-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin-right: 10px;
 }

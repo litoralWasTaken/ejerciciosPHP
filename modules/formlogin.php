@@ -1,4 +1,4 @@
-<form action="" method="POST">
+<form action="" method="POST" enctype="multipart/form-data">
     <div class="row mb-3">
         <label for="email" class="col-sm-2 col-form-label">Email</label>
         <div class="col-sm-10">
@@ -10,6 +10,10 @@
         <div class="col-sm-10">
             <input type="password" class="form-control" id="password" name="password">
         </div>
+    </div>
+    <div class="mb-3">
+        <label for="formFile" class="col-sm-2 col-form-label">Foto de perfil</label>
+        <input class="form-control" type="file" id="formFile" name="formFile">
     </div>
     <button type="submit" class="btn btn-primary">Login</button>
 </form>

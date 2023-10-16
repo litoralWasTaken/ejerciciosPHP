@@ -1,7 +1,12 @@
 <?php
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // Recogida de datos
 $email = $_POST['email'];
 $password = $_POST['password'];
+$formFile = $_FILES['formFile'];
+
 // validaciones de Login
 function didValidateEmail($email)
 {
@@ -28,21 +33,40 @@ function didValidatePassword($password)
     return $returnPass;
 }
 
-function requiredFields($email, $password)
+function didValidateLoginFile($loginFile)
+{
+    global $error_code;
+    $file_location = 'uploads/' . $loginFile['name'];
+
+    $returnLoginFile = false;
+    if ($loginFile['type'] == 'image/jpeg' || $loginFile['type'] == 'image/jpg' || $loginFile['type'] == 'image/png') {
+        if (move_uploaded_file($loginFile['tmp_name'], $file_location)) {
+            $returnLoginFile = true;
+        } else {
+            $error_code = 'Fallo al guardar el archivo';
+        }
+    } else {
+        $error_code = 'Extensión de archivo no válida';
+    }
+
+    return $returnLoginFile;
+}
+
+function requiredFields($email, $password, $loginFile)
 {
     $returnFields = false;
-    if (isset($email) && isset($password)) {
+    if (isset($email) && isset($password) && isset($loginFile)) {
         $returnFields = true;
     }
     return $returnFields;
 }
 
-function validateLogin($email, $password)
+function validateLogin($email, $password, $loginFile)
 {
     $did_login = false;
-    if (requiredFields($email, $password)) {
+    if (requiredFields($email, $password, $loginFile)) {
 
-        if (didValidateEmail($email) && didValidatePassword($password)) {
+        if (didValidateEmail($email) && didValidatePassword($password) && didValidateLoginFile($loginFile)) {
             $did_login = true;
         }
     }
@@ -52,7 +76,7 @@ function validateLogin($email, $password)
 
 global $error_code;
 
-$did_login = validateLogin($email, $password);
+$did_login = validateLogin($email, $password, $formFile);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -74,6 +98,7 @@ $did_login = validateLogin($email, $password);
             <a class="link" href="#">Servicios</a>
             <a class="link" href="#">Sobre nosotros</a>
             <a class="link" href="#">Contacto</a>
+            <img class="login-image" src=<?php echo 'uploads/' . $formFile['name']; ?> alt="Login" />
             <li class="nav-item">
                 <?php if (!$did_login) {
                     echo '<a class="btn btn-outline-light" href="#">Login</a>';
@@ -88,7 +113,6 @@ $did_login = validateLogin($email, $password);
             <div class="row justify-content-center">
                 <div class="col-6">
                     <?php
-                    var_dump($error_code);
                     if (!$did_login) {
                         require_once('./modules/formlogin.php');
                         if (isset($error_code)) {

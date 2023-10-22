@@ -52,7 +52,13 @@ function validateLogin($email, $password)
 
 global $error_code;
 
-$did_login = validateLogin($email, $password);
+$did_login = false;
+if ($did_login = validateLogin($email, $password)) {
+    session_start();
+    $_SESSION['email']  = $email;
+    $_SESSION['password'] = $password;
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -88,7 +94,6 @@ $did_login = validateLogin($email, $password);
             <div class="row justify-content-center">
                 <div class="col-6">
                     <?php
-                    var_dump($error_code);
                     if (!$did_login) {
                         require_once('./modules/formlogin.php');
                         if (isset($error_code)) {

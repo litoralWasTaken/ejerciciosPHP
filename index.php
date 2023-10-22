@@ -91,7 +91,7 @@ if (empty($_SESSION)) {
                 <?php if (!$did_login) {
                     echo '<a class="btn btn-outline-light" href="#">Login</a>';
                 } else if ($did_login) {
-                    echo '<a class="btn btn-outline-danger" href="#">Logout</a>';
+                    echo '<a class="btn btn-outline-danger" href="./modules/logout.php">Logout</a>';
                 } ?>
             </li>
         </ul>

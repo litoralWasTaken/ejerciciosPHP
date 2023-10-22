@@ -53,11 +53,18 @@ function validateLogin($email, $password)
 global $error_code;
 
 $did_login = false;
-if ($did_login = validateLogin($email, $password)) {
-    session_start();
-    $_SESSION['email']  = $email;
-    $_SESSION['password'] = $password;
+session_start();
+if (empty($_SESSION)) {
+    if ($did_login = validateLogin($email, $password)) {
+        $_SESSION['email']  = $email;
+        $_SESSION['password'] = $password;
+    }
+} else {
+    $did_login = true;
+    $email = $_SESSION['email'];
+    $password = $_SESSION['password'];
 }
+
 
 ?>
 <!DOCTYPE html>
@@ -100,7 +107,7 @@ if ($did_login = validateLogin($email, $password)) {
                             require './modules/error.php';
                         }
                     } else {
-                        echo "<h1> Bienvenido: $email </h1>";
+                        require './modules/infopage.php';
                     }
                     ?>
 
